@@ -35,13 +35,22 @@ public class LinkedList {
             Node curr1 = this.head;
             Node curr2 = listOther.head;
             while (curr1 != null || curr2 != null) {
-                // FILL IN CODE
-
-
+                if (curr2 == null) {
+                    res.append(curr1.elem());
+                    curr1 = curr1.next();
+                } else if (curr1 == null) {
+                    res.append(curr2.elem());
+                    curr2 = curr2.next();
+                } else if (curr1.elem() < curr2.elem()) {
+                    res.append(curr1.elem());
+                    curr1 = curr1.next();
+                } else {
+                    res.append(curr2.elem());
+                    curr2 = curr2.next();
+                }
             }
 
             return res;
-
     }
 
     public void print() {
