@@ -47,12 +47,20 @@ public class HashTableClosedHashing  {
      */
     public boolean containsKey(int key) {
         int index = hash(key); // the index where this key hashes
+
         if (table[index] == null)
             return false;
-        if (table[index].getKey() == key) // found the key at the index where it hashed
-            return true;
-
         // FILL IN CODE: search for this key starting with the next cell:
+        int i = 0;
+        while (table[index] != null) {
+            if (table[index].getKey() == key) // found the key at the index where it hashed
+                return true;
+            index = (index + 1) % maxSize;
+            i++;
+            if (i >= maxSize) {
+                return false;
+            }
+        }
 
         return false; // if could not find it
     }
@@ -68,18 +76,27 @@ public class HashTableClosedHashing  {
     public boolean put(int key, int value) {
         boolean foundPlaceToInsert = false;
         int index = hash(key);
-        if (table[index] == null) { // index is available
-            table[index] = new HashEntry(key, value);
-            foundPlaceToInsert = true; // found a place where we can insert
-            return foundPlaceToInsert;
-        }
-        else { // Search for the next available index
+//        if (table[index] == null) { // index is available
+//            table[index] = new HashEntry(key, value);
+//            foundPlaceToInsert = true; // found a place where we can insert
+////            return foundPlaceToInsert;
+//        }
+//        else {
+            // Search for the next available index
                // If found a place, insert the key, value and return true.
                // Make sure you handle the case when the table is full
                // FILL IN CODE
-
-
-        }
+            int i = 0;
+            while (table[index] != null) {
+                index = (index + 1) % maxSize;
+                i++;
+                if (i >= maxSize) {
+                    return false;
+                }
+            }
+            table[index] = new HashEntry(key, value);
+            foundPlaceToInsert = true;
+//        }
         return foundPlaceToInsert; // will return false, if the table was full,
         // so we could not insert this key, value
     }
