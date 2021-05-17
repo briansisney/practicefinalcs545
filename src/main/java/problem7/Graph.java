@@ -5,14 +5,20 @@ public class Graph {
     public static void printBFS(int[][] matrix,  int sourceVertex) {
         boolean[] visited = new boolean[matrix.length];
         visited[sourceVertex] = true;
-        System.out.println(sourceVertex);
 
         Queue queue = new ArrayQueue();
         queue.enqueue(sourceVertex);
-
+        Integer o;
         while (!queue.empty()) {
-            // FILL IN CODE
+            o = (int) queue.dequeue();
 
+            System.out.println(o.toString());
+            for (int i = 0; i < matrix[o].length; i++) {
+                if (!visited[i] && matrix[o][i] == 1) {
+                    visited[i] = true;
+                    queue.enqueue(i);
+                }
+            }
         }
     }
 
