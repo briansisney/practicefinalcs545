@@ -1,5 +1,7 @@
 package problem9;
 
+import java.util.Arrays;
+
 public class MinHeap {
     private int[] heap;
     private int size; // the current number of elements in the heap
@@ -9,8 +11,15 @@ public class MinHeap {
     }
 
     public void insert(int elem) {
-        // FILL IN CODE
+        int i = ++size;
+        heap[i] = elem;
+        System.out.println(elem);
 
+        while (i > 0 && heap[parent(i)] > heap[i]) {
+            swap(parent(i), i);
+            i = parent(i);
+        }
+        System.out.println(Arrays.toString(heap));
     }
 
     /** Helper method for the insert method
